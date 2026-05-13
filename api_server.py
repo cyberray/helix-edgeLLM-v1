@@ -3,6 +3,7 @@
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from llm_edge_router import LLMEdgeRouter
@@ -11,8 +12,12 @@ from llm_edge_router import LLMEdgeRouter
 
 from fastapi.responses import RedirectResponse, HTMLResponse
 
+
 app = FastAPI(title="Edge LLM API", version="0.1.0")
 router = LLMEdgeRouter()
+
+# Serve static files (frontend) at root
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # Root endpoint: show a welcome message and link to docs
 @app.get("/", response_class=HTMLResponse)
