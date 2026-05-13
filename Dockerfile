@@ -1,7 +1,16 @@
 # --- Backend (FastAPI + Python) ---
+
+# --- Backend (FastAPI + Python) ---
 FROM python:3.11-slim AS backend
 
 WORKDIR /app
+
+
+# Install build tools for llama-cpp-python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential \
+	cmake \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt ./
@@ -25,6 +34,12 @@ RUN npm run build
 # --- Final image: serve frontend + backend ---
 FROM python:3.11-slim
 WORKDIR /app
+
+# Install build tools for llama-cpp-python runtime (needed for some wheels)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential \
+	cmake \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Copy backend from backend stage
 COPY --from=backend /app /app
