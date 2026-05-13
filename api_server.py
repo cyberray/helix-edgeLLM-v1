@@ -8,8 +8,28 @@ from pydantic import BaseModel
 from llm_edge_router import LLMEdgeRouter
 
 
+
+from fastapi.responses import RedirectResponse, HTMLResponse
+
 app = FastAPI(title="Edge LLM API", version="0.1.0")
 router = LLMEdgeRouter()
+
+# Root endpoint: show a welcome message and link to docs
+@app.get("/", response_class=HTMLResponse)
+async def root():
+        return """
+        <h2>Edge LLM API is running 🚀</h2>
+        <ul>
+            <li>Try <a href='/docs'>Swagger UI</a> for interactive API docs.</li>
+            <li>Health check: <a href='/api/health'>/api/health</a></li>
+            <li>POST to <code>/api/route</code> or <code>/api/generate</code> with JSON.</li>
+        </ul>
+        """
+
+# Redirect /docs to FastAPI docs (optional, but makes /docs always work)
+@app.get("/docs", include_in_schema=False)
+async def docs_redirect():
+        return RedirectResponse("/redoc")
 
 
 class RouteRequest(BaseModel):
