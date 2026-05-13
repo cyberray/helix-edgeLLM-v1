@@ -1,0 +1,18 @@
+{
+  "qwen2.5-3b-q4": {
+    "name": "Qwen2.5 3B Q4_K_M",
+    "provider": "Alibaba",
+    "path": "models\\qwen2.5-3b-instruct-q4_k_m.gguf",
+    "size_mb": 1900,
+    "quantization": "Q4_K_M",
+    "recommended_use": "Coding tasks, multilingual"
+  },
+  "gemma-2-2b-q4": {
+    "name": "Gemma 2 2B Q4_K_M",
+    "provider": "Google",
+    "path": "models\\gemma-2-2b-it-Q4_K_M.gguf",
+    "size_mb": 1400,
+    "quantization": "Q4_K_M",
+    "recommended_use": "Smallest model, resource-constrained devices"
+  }
+}

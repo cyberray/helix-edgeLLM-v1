@@ -1,0 +1,372 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        // Python Configuration
+        "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.terminal.activateEnvInCurrentTerminal": true,
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.flake8Enabled": false,
+        "python.formatting.provider": "black",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true,
+        
+        // GitHub Copilot Configuration
+        "github.copilot.enable": {
+            "*": true,
+            "python": true,
+            "markdown": true,
+            "javascript": true,
+            "typescript": true,
+            "json": true,
+            "yaml": true
+        },
+        "github.copilot.advanced": {
+            "debug.overrideEngine": "gpt-4"
+        },
+        
+        // Editor Settings
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "source.fixAll": true
+        },
+        "editor.suggestSelection": "first",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.rulers": [88, 120],
+        "editor.wordWrap": "on",
+        "editor.minimap.enabled": true,
+        
+        // File Associations
+        "files.associations": {
+            "*.md": "markdown",
+            "*.py": "python",
+            ".env": "properties",
+            "*.sh": "shellscript"
+        },
+        
+        // Files to Exclude from Explorer
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/.pytest_cache": true,
+            "**/venv": false,
+            "**/.git": true,
+            "**/.DS_Store": true,
+            "**/*.egg-info": true
+        },
+        
+        // Files to Exclude from Search
+        "search.exclude": {
+            "**/venv": true,
+            "**/__pycache__": true,
+            "**/node_modules": true,
+            "**/*.pyc": true,
+            "**/models": false
+        },
+        
+        // Terminal Configuration
+        "terminal.integrated.env.osx": {
+            "PYTHONPATH": "${workspaceFolder}"
+        },
+        "terminal.integrated.env.linux": {
+            "PYTHONPATH": "${workspaceFolder}"
+        },
+        "terminal.integrated.env.windows": {
+            "PYTHONPATH": "${workspaceFolder}"
+        },
+        "terminal.integrated.defaultProfile.osx": "zsh",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.defaultProfile.windows": "PowerShell",
+        "terminal.integrated.fontSize": 13,
+        
+        // Git Configuration
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "git.enableSmartCommit": true,
+        
+        // Error Lens (if installed)
+        "errorLens.enabled": true,
+        "errorLens.enabledDiagnosticLevels": [
+            "error",
+            "warning"
+        ],
+        
+        // Testing
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestArgs": [
+            "test_edge_llm.py",
+            "-v"
+        ],
+        
+        // Jupyter
+        "jupyter.askForKernelRestart": false,
+        
+        // File Watchers
+        "files.watcherExclude": {
+            "**/venv/**": true,
+            "**/models/**": true,
+            "**/__pycache__/**": true
+        }
+    },
+    
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "github.copilot",
+            "github.copilot-chat",
+            "usernamehw.errorlens",
+            "streetsidesoftware.code-spell-checker",
+            "ms-python.black-formatter",
+            "ms-toolsai.jupyter",
+            "tamasfe.even-better-toml",
+            "redhat.vscode-yaml",
+            "eamodio.gitlens"
+        ]
+    },
+    
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "🚀 Run Example Integration",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/example_integration.py",
+                "console": "integratedTerminal",
+                "justMyCode": true,
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            {
+                "name": "💬 Start CLI Chat",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/edge-llm-cli.py",
+                "args": ["chat"],
+                "console": "integratedTerminal",
+                "justMyCode": true
+            },
+            {
+                "name": "📦 Download Models",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/download_models.py",
+                "args": ["--list"],
+                "console": "integratedTerminal",
+                "justMyCode": true
+            },
+            {
+                "name": "🧪 Run Tests",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/test_edge_llm.py",
+                "module": "pytest",
+                "args": [
+                    "test_edge_llm.py",
+                    "-v",
+                    "-s"
+                ],
+                "console": "integratedTerminal",
+                "justMyCode": true
+            },
+            {
+                "name": "📄 Current File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "justMyCode": true
+            }
+        ]
+    },
+    
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "🔧 Setup: Create Virtual Environment",
+                "type": "shell",
+                "command": "python3 -m venv venv",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📦 Setup: Install Dependencies",
+                "type": "shell",
+                "command": "pip install -r requirements.txt",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "⚡ Quick Start (Automated)",
+                "type": "shell",
+                "command": "./quickstart.sh",
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📥 Download Models: Desktop",
+                "type": "shell",
+                "command": "python download_models.py --platform desktop",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📥 Download Models: iOS",
+                "type": "shell",
+                "command": "python download_models.py --platform ios",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📥 Download Models: Android",
+                "type": "shell",
+                "command": "python download_models.py --platform android",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📥 Download Models: Web",
+                "type": "shell",
+                "command": "python download_models.py --platform web",
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🧪 Run All Tests",
+                "type": "shell",
+                "command": "pytest test_edge_llm.py -v",
+                "group": {
+                    "kind": "test",
+                    "isDefault": true
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📊 Run Tests with Coverage",
+                "type": "shell",
+                "command": "pytest test_edge_llm.py --cov=. --cov-report=html",
+                "group": "test",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "💬 Start CLI Chat",
+                "type": "shell",
+                "command": "python edge-llm-cli.py chat",
+                "group": "none",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated",
+                    "focus": true
+                },
+                "problemMatcher": [],
+                "isBackground": false
+            },
+            {
+                "label": "📋 Show System Status",
+                "type": "shell",
+                "command": "python edge-llm-cli.py status",
+                "group": "none",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🔍 List Available Models",
+                "type": "shell",
+                "command": "python edge-llm-cli.py models",
+                "group": "none",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "⚡ Run Benchmarks",
+                "type": "shell",
+                "command": "python edge-llm-cli.py benchmark",
+                "group": "none",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🚀 Run Example Integration",
+                "type": "shell",
+                "command": "python example_integration.py",
+                "group": "none",
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "dedicated"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🧹 Clean Python Cache",
+                "type": "shell",
+                "command": "find . -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null; find . -type f -name '*.pyc' -delete 2>/dev/null",
+                "group": "none",
+                "presentation": {
+                    "reveal": "silent"
+                },
+                "problemMatcher": []
+            }
+        ]
+    }
+}
