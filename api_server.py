@@ -17,7 +17,7 @@ app = FastAPI(title="Edge LLM API", version="0.1.0")
 router = LLMEdgeRouter()
 
 # Serve static files (frontend) at root
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
 # Root endpoint: show a welcome message and link to docs
 @app.get("/", response_class=HTMLResponse)
