@@ -54,4 +54,4 @@ RUN pip install --no-cache-dir uvicorn[standard] fastapi
 EXPOSE 8000
 
 # Start FastAPI with Uvicorn, serving static files
-CMD ["sh", "-c", "ls -l /app && python3 --version && python3 download_models.py && uvicorn api_server:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "ls -l /app && python3 --version && uvicorn api_server:app --host 0.0.0.0 --port 8000"]
