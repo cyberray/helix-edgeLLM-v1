@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace with your frontend domain in production
+    allow_origins=["https://inspiring-elf-a080fa.netlify.app"],  # Only allow your Netlify frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
