@@ -19,8 +19,7 @@ import asyncio
 # Model file mappings: model_id -> GGUF filename in models/
 _GGUF_FILENAMES: Dict[str, str] = {
     "qwen2.5-3b": "qwen2.5-3b-instruct-q4_k_m.gguf",
-    "phi-3.5-mini": "phi-3.5-mini-instruct-q4_k_m.gguf",
-
+    "phi-3.5-mini": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
 }
 
 _llama_instances: Dict[str, Any] = {}
@@ -486,7 +485,14 @@ class LLMEdgeRouter:
 
         try:
             from llama_cpp import Llama
+        except ModuleNotFoundError as exc:
+            return (
+                "[LOCAL] Inference error: llama-cpp-python is not installed. "
+                "Install it with `pip install llama-cpp-python` "
+                "and restart the backend."
+            )
 
+        try:
             cache_key = str(gguf_path)
             if cache_key not in _llama_instances:
                 _llama_instances[cache_key] = Llama(
