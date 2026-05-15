@@ -77,46 +77,45 @@ MODEL_REGISTRY = {
         recommended_use="Smallest model, resource-constrained devices"
     ),
 }
-
 def main():
-    # Download all models in the registry by default
-    downloader = ModelDownloader()
-    model_ids = list(MODEL_REGISTRY.keys())
-    downloader.download_multiple(model_ids)
-
-if __name__ == "__main__":
-    main()
-
 
 class ModelDownloader:
     """Handles model downloading, verification, and setup"""
-    
+
     def __init__(self, models_dir: str = "./models"):
         self.models_dir = Path(models_dir)
         self.models_dir.mkdir(parents=True, exist_ok=True)
         self.config_file = self.models_dir / "models.json"
-        
+
     def download_model(self, model_id: str, force: bool = False) -> Path:
         """Download a model by ID"""
-        
+
         if model_id not in MODEL_REGISTRY:
             available = ", ".join(MODEL_REGISTRY.keys())
             raise ValueError(f"Unknown model: {model_id}. Available: {available}")
-        
+
         model = MODEL_REGISTRY[model_id]
         destination = self.models_dir / model.file_name
-        
+
         # Check if already exists
         if destination.exists() and not force:
             print(f"✓ Model already exists: {destination}")
             self._save_model_config(model, destination)
             return destination
-        
+
         print(f"\n📥 Downloading {model.name}")
         print(f"   Provider: {model.provider}")
         print(f"   Size: {model.size_mb}MB")
         print(f"   Quantization: {model.quantization}")
         print(f"   Use case: {model.recommended_use}\n")
+        def main():
+            # Download all models in the registry by default
+            downloader = ModelDownloader()
+            model_ids = list(MODEL_REGISTRY.keys())
+            downloader.download_multiple(model_ids)
+
+        if __name__ == "__main__":
+            main()
         
         # Download with progress bar
         response = requests.get(model.url, stream=True)
