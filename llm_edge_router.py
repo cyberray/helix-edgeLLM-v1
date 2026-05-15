@@ -20,7 +20,7 @@ import asyncio
 _GGUF_FILENAMES: Dict[str, str] = {
     "qwen2.5-3b": "qwen2.5-3b-instruct-q4_k_m.gguf",
     "phi-3.5-mini": "phi-3.5-mini-instruct-q4_k_m.gguf",
-    "llama-3.2-3b": "llama-3.2-3b-instruct-q4_k_m.gguf",
+
 }
 
 _llama_instances: Dict[str, Any] = {}
@@ -146,15 +146,7 @@ class LLMEdgeRouter:
                 supports_offline=True,
                 strengths=["coding", "math", "multilingual"],
             ),
-            "llama-3.2-3b": ModelConfig(
-                name="Llama 3.2 3B",
-                tier=ModelTier.LOCAL,
-                max_context=128000,
-                cost_per_1k_tokens=0.0,
-                avg_latency_ms=140,
-                supports_offline=True,
-                strengths=["general", "instruction_following"],
-            ),
+
             
             # Cloud Fast Models
             "gemini-flash": ModelConfig(
@@ -611,7 +603,7 @@ class LLMEdgeRouter:
 
     async def _fallback_to_local(self, prompt: str) -> Optional[tuple[str, str]]:
         """Best-effort fallback to an available local model."""
-        local_priority = ["qwen2.5-3b", "phi-3.5-mini", "llama-3.2-3b"]
+        local_priority = ["qwen2.5-3b", "phi-3.5-mini"]
 
         for model_id in local_priority:
             local_model = self.models.get(model_id)
