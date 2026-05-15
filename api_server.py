@@ -23,7 +23,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # DEBUG: Allow all origins for troubleshooting
+    allow_origins=[
+        "https://inspiring-elf-a080fa.netlify.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
