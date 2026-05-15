@@ -20,8 +20,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code and download script
 COPY llm_edge_router.py api_server.py download_models.py ./
 
-# Download models during build (unbuffered for logs)
-RUN python -u download_models.py
+# Download models during build (non-interactive)
+RUN python -u download_models.py --download phi-3.5-mini-q4 qwen2.5-3b-q4 llama-3.2-3b-q4 gemma-2-2b-q4
 
 # Copy models directory if present (optional, won't overwrite downloaded models)
 COPY models ./models
