@@ -16,8 +16,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
-COPY llm_edge_router.py api_server.py ./
+
+# Copy backend code and download script
+COPY llm_edge_router.py api_server.py download_models.py ./
+
+# Download models during build
+RUN python download_models.py
+
+# Copy models directory if present (optional, won't overwrite downloaded models)
 COPY models ./models
 
 # Copy .env if needed (for local dev only; use secrets in prod)
