@@ -108,14 +108,7 @@ class ModelDownloader:
         print(f"   Size: {model.size_mb}MB")
         print(f"   Quantization: {model.quantization}")
         print(f"   Use case: {model.recommended_use}\n")
-        def main():
-            # Download all models in the registry by default
-            downloader = ModelDownloader()
-            model_ids = list(MODEL_REGISTRY.keys())
-            downloader.download_multiple(model_ids)
 
-        if __name__ == "__main__":
-            main()
         
         # Download with progress bar
         response = requests.get(model.url, stream=True)
@@ -229,16 +222,7 @@ class ModelDownloader:
         with open(self.config_file, 'w') as f:
             json.dump(config, f, indent=2)
     
-    def setup_for_platform(self, platform: str, model_ids: Optional[List[str]] = None):
-        """Setup models for specific platform"""
-        
-        platform_recommendations = {
-            "ios": ["phi-3.5-mini-q4", "qwen2.5-3b-q4"],
-            "android": ["phi-3.5-mini-q4", "llama-3.2-3b-q4"],
-            "web": ["gemma-2-2b-q4", "phi-3.5-mini-q4"],
-            "desktop": ["phi-3.5-mini-q5", "qwen2.5-3b-q4"],
-        }
-        
+            print(f"   Use case: {model.recommended_use}\n")
         if platform not in platform_recommendations:
             print(f"Unknown platform: {platform}")
             print(f"Available: {', '.join(platform_recommendations.keys())}")
