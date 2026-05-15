@@ -77,7 +77,7 @@ MODEL_REGISTRY = {
         recommended_use="Smallest model, resource-constrained devices"
     ),
 }
-def main():
+
 
 class ModelDownloader:
     """Handles model downloading, verification, and setup"""
