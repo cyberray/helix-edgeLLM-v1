@@ -93,27 +93,6 @@ const LLMEdgeSystem = () => {
       apiEndpoint: null
     },
     {
-      id: 'llama-3.2-3b',
-      name: 'Llama 3.2 3B',
-      provider: 'Meta',
-      category: 'local',
-      size: '3.2GB',
-      sizeBytes: 3200000000,
-      params: '3B',
-      contextWindow: '128K',
-      reasoning: 8,
-      coding: 7,
-      speed: 9,
-      deployment: 'iOS, Android, Web',
-      license: 'Llama 3.2 License',
-      description: 'Lightweight variant of Llama 3.2, excellent for on-device inference.',
-      strengths: ['Fast inference', 'Low memory', 'Good general knowledge', 'Mobile SDK available'],
-      useCases: ['Chatbots', 'Text analysis', 'Basic coding tasks'],
-      frameworks: ['llama.cpp', 'ExecuTorch', 'MLC-LLM', 'GGUF'],
-      quantization: ['Q4_0 (1.7GB)', 'Q5_K_M (2.2GB)', 'Q8_0 (3.2GB)'],
-      apiEndpoint: null
-    },
-    {
       id: 'gemma-2-2b',
       name: 'Gemma 2 2B',
       provider: 'Google',
