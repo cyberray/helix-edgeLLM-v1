@@ -21,7 +21,7 @@ const LLMEdgeSystem = () => {
     setTestResults(null);
 
     try {
-      const API_BASE = 'https://helix-edgellm-v1-production.up.railway.app';
+      const API_BASE = 'https://magnificent-simplicity-production-3ad9.up.railway.app';
       const routeRes = await fetch(`${API_BASE}/api/route`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

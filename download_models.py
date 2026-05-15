@@ -30,7 +30,7 @@ class ModelInfo:
     recommended_use: str
 
 
-# Model registry with verified download links
+
 MODEL_REGISTRY = {
     "phi-3.5-mini-q4": ModelInfo(
         id="phi-3.5-mini-q4",
@@ -39,20 +39,9 @@ MODEL_REGISTRY = {
         file_name="Phi-3.5-mini-instruct-Q4_K_M.gguf",
         size_mb=2048,
         url="https://huggingface.co/microsoft/Phi-3.5-mini-instruct-gguf/resolve/main/Phi-3.5-mini-instruct-Q4_K_M.gguf",
-        sha256="",  # Add actual hash
+        sha256="",  # Add actual hash if available
         quantization="Q4_K_M",
         recommended_use="General purpose, best balance"
-    ),
-    "phi-3.5-mini-q5": ModelInfo(
-        id="phi-3.5-mini-q5",
-        name="Phi-3.5-mini Q5_K_M",
-        provider="Microsoft",
-        file_name="Phi-3.5-mini-instruct-Q5_K_M.gguf",
-        size_mb=2500,
-        url="https://huggingface.co/microsoft/Phi-3.5-mini-instruct-gguf/resolve/main/Phi-3.5-mini-instruct-Q5_K_M.gguf",
-        sha256="",
-        quantization="Q5_K_M",
-        recommended_use="Higher quality, more storage"
     ),
     "qwen2.5-3b-q4": ModelInfo(
         id="qwen2.5-3b-q4",
@@ -88,6 +77,15 @@ MODEL_REGISTRY = {
         recommended_use="Smallest model, resource-constrained devices"
     ),
 }
+
+def main():
+    # Download all models in the registry by default
+    downloader = ModelDownloader()
+    model_ids = list(MODEL_REGISTRY.keys())
+    downloader.download_multiple(model_ids)
+
+if __name__ == "__main__":
+    main()
 
 
 class ModelDownloader:
